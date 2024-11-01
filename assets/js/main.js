@@ -209,7 +209,6 @@
 })();
 
 // Songs added here
-
 import allMusic from './music-list.js';
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -225,14 +224,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const progressContainer = document.getElementById('progressContainer');
   const progressBar = document.getElementById('progressBar');
   const progressIndicator = document.getElementById('progressIndicator');
-
   const currentSongIcon = document.getElementById("currentSongIcon");
-  let currentSongLyricsSection = null;
 
-  let currentSongSrc = null;
+  let currentSongSrc = null; // Track the current song source
 
+  // Toggle play/pause button
   playPauseBtn.addEventListener('click', togglePlayPause);
 
+  // Display songs on page load
   function displaySongs() {
     songListContainer.innerHTML = ''; 
 
@@ -250,11 +249,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       songItem.addEventListener('click', () => {
         if (currentSongSrc === song.src) {
+          // Scroll to lyrics if the same song is already playing
           toggleSection("urdu"); 
           document.getElementById("services").scrollIntoView({ behavior: "smooth" });
           return; 
         }
 
+        // Load and play a new song if a different one is clicked
         fetchAndDisplayLyrics(song.lyricsFile, song.src);
         toggleSection("urdu"); 
         document.getElementById("services").scrollIntoView({ behavior: "smooth" });
@@ -264,6 +265,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Fetch and display lyrics, start playing the song
   function fetchAndDisplayLyrics(lyricsFile, audioSrc) {
     const lyricsPath = `assets/lyrics/${lyricsFile}`;
     fetch(lyricsPath)
@@ -278,13 +280,11 @@ document.addEventListener("DOMContentLoaded", function () {
         urduLyricsContainer.innerHTML = englishLyrics ? englishLyrics.replace(/\n/g, "<br>") : "Urdu lyrics not found.";
         khowarLyricsContainer.innerHTML = khowarLyrics ? khowarLyrics.replace(/\n/g, "<br>") : "Khowar lyrics not found.";
 
-        currentSongSrc = audioSrc; 
-        audioPlayer.src = audioSrc; 
-        audioPlayer.play(); 
+        currentSongSrc = audioSrc; // Update the current song source
+        audioPlayer.src = audioSrc;
+        audioPlayer.play();
         playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'; 
-
-        // Set the current song lyrics section ID for navigation
-        currentSongLyricsSection = document.getElementById("services"); // Assuming "services" section is where lyrics are displayed
+        currentSongIcon.src = "assets/img/playingMusic.gif";
       })
       .catch(error => {
         console.error("Error fetching lyrics:", error);
@@ -293,15 +293,16 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  // Add click event listener to the current song icon
+  // Scroll to lyrics section if the icon is clicked and a song is playing
   currentSongIcon.addEventListener("click", function () {
-    if (currentSongLyricsSection) {
-      currentSongLyricsSection.scrollIntoView({ behavior: "smooth" });
+    if (currentSongSrc) {
+      document.getElementById("services").scrollIntoView({ behavior: "smooth" });
     } else {
       alert("No song is currently playing!");
     }
   });
 
+  // Toggle section display between Khowar and Urdu
   function toggleSection(language) {
     if (language === "khowar") {
       khowarSection.classList.add('active');
@@ -316,40 +317,47 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Toggle buttons for Khowar and Urdu
   toggleKhowar.addEventListener('click', () => toggleSection("khowar"));
   toggleUrdu.addEventListener('click', () => toggleSection("urdu"));
 
+  // Toggle play/pause functionality
   function togglePlayPause() {
     if (audioPlayer.paused) {
       audioPlayer.play();
       playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      currentSongIcon.src = "assets/img/playingMusic.gif";
     } else {
       audioPlayer.pause();
       playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+      currentSongIcon.src = "assets/img/notPlayingMusic.png";
     }
   }
 
+  // Update icon when the audio ends
+  audioPlayer.addEventListener('ended', () => {
+    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+    currentSongIcon.src = "assets/img/notPlayingMusic.png";
+  });
+
+  // Update progress bar and indicator
   audioPlayer.addEventListener('timeupdate', () => {
     const progressPercent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
     progressBar.style.width = `${progressPercent}%`;
 
-    // Adjust the indicator position based on the play button's width
+    // Adjust the indicator position
     const playPauseButtonWidth = playPauseBtn.offsetWidth; 
     const progressContainerWidth = progressContainer.offsetWidth;
     const indicatorPosition = ((progressPercent / 100) * progressContainerWidth) + playPauseButtonWidth + 5;
     progressIndicator.style.left = `${indicatorPosition}px`;
   });
 
+  // Seek function for progress bar
   progressContainer.addEventListener('click', (e) => {
     const clickX = e.offsetX;
     const width = progressContainer.clientWidth;
     audioPlayer.currentTime = (clickX / width) * audioPlayer.duration;
   });
 
-  audioPlayer.addEventListener('ended', () => {
-    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-  });
-
   displaySongs();
 });
-
