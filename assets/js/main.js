@@ -224,6 +224,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const playPauseBtn = document.getElementById('playPauseBtn');
   const progressContainer = document.getElementById('progressContainer');
   const progressBar = document.getElementById('progressBar');
+  const progressIndicator = document.getElementById('progressIndicator');
+
+  // Track the current song's source URL
+  let currentSongSrc = null;
 
   // Ensure that play/pause button and toggle buttons are working correctly
   playPauseBtn.addEventListener('click', togglePlayPause);
@@ -246,7 +250,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Click event to fetch and display lyrics, default to Urdu, and scroll to lyrics section
       songItem.addEventListener('click', () => {
-        fetchAndDisplayLyrics(song.lyricsFile, song.src); // Pass the audio src to the function
+        // Check if the clicked song is the same as the currently playing song
+        if (currentSongSrc === song.src) {
+          // Just update the lyrics view without reloading the audio
+          toggleSection("urdu"); // Show Urdu section by default
+          document.getElementById("services").scrollIntoView({ behavior: "smooth" });
+          return; // Exit if it's the same song
+        }
+
+        // Otherwise, play the new song
+        fetchAndDisplayLyrics(song.lyricsFile, song.src);
         toggleSection("urdu"); // Show Urdu section by default
         document.getElementById("services").scrollIntoView({ behavior: "smooth" });
       });
@@ -266,12 +279,13 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(data => {
         const lyricsLines = data.split('\n').slice(3).join('\n');
         const [englishLyrics, khowarLyrics] = lyricsLines.split("URDUONWARDS").map(text => text.trim());
-        
+
         // Display English and Khowar lyrics in their respective containers
         urduLyricsContainer.innerHTML = englishLyrics ? englishLyrics.replace(/\n/g, "<br>") : "Urdu lyrics not found.";
         khowarLyricsContainer.innerHTML = khowarLyrics ? khowarLyrics.replace(/\n/g, "<br>") : "Khowar lyrics not found.";
 
-        // Load and play audio
+        // Play the new song
+        currentSongSrc = audioSrc; // Update the current song source
         audioPlayer.src = audioSrc; // Set the audio source
         audioPlayer.play(); // Start playing the audio
         playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'; // Set icon to Pause when playing
@@ -317,16 +331,13 @@ document.addEventListener("DOMContentLoaded", function () {
   audioPlayer.addEventListener('timeupdate', () => {
     const progressPercent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
     progressBar.style.width = `${progressPercent}%`;
-  
+
     // Calculate the indicator's position based on the width of the progress bar
-    const progressContainerWidth = document.getElementById('progressContainer').offsetWidth;
+    const progressContainerWidth = progressContainer.offsetWidth;
     const playPauseButtonWidth = 55; // Width of the play/pause button
     const indicatorPosition = (progressPercent / 100) * progressContainerWidth + playPauseButtonWidth;
-    document.getElementById('progressIndicator').style.left = `${indicatorPosition}px`;
+    progressIndicator.style.left = `${indicatorPosition}px`;
   });
-  
-  
-  
 
   // Seek functionality when clicking on the progress container
   progressContainer.addEventListener('click', (e) => {
@@ -343,6 +354,3 @@ document.addEventListener("DOMContentLoaded", function () {
   // Call displaySongs on page load
   displaySongs();
 });
-
-
-
