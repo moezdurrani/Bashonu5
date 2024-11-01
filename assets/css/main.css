@@ -633,7 +633,8 @@ h6 {
   right: 15px;
   bottom: -15px;
   z-index: 99999;
-  background-color: var(--accent-color);
+  /* background-color: var(--accent-color); */
+  background-color: #f435e4;
   width: 44px;
   height: 44px;
   border-radius: 50px;
@@ -647,7 +648,8 @@ h6 {
 }
 
 .scroll-top:hover {
-  background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
+  /* background-color: color-mix(in srgb, var(--accent-color), transparent 20%); */
+  background-color: color-mix(in srgb, #f435e4, transparent 30%);
   color: var(--contrast-color);
 }
 
@@ -1047,7 +1049,7 @@ section,
 }
 
 .toggle-btn.active {
-  background-color: #4058f8;
+  background-color: #f435e4;
   color: #fff;
   border-radius: 15px;
 }
@@ -1227,6 +1229,24 @@ section,
   list-style: none;
   text-align: center;
 }
+
+#portfolio {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+#portfolio .container {
+  height: 100%;
+  width: 100%;
+}
+
+#portfolio iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 
 .portfolio .portfolio-filters li {
   cursor: pointer;
@@ -1421,8 +1441,10 @@ section,
   color: #444444;
 }
 
-.section-title {
+#team {
+  height: 100vh;
 }
+
 
 .subtitles {
   font-weight: bold;
@@ -1773,7 +1795,7 @@ section,
   max-width: 600px;
   margin-top: 0px;
   padding: 20px;
-  background: #f8f8f8;
+  background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -1790,23 +1812,23 @@ section,
   display: flex;
   align-items: center;
   font-size: 15px;
-  color: #666;
+  color: #ffffff;
   margin: 3px 0;
   padding: 10px 15px;
-  background: #ffffff;
+  background: #ec6ee1;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .contact-rating .rating-label:hover {
-  background: #f1f1f1;
+  background: #e731d8;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .contact-rating input[type="radio"] {
   margin-right: 20px;
-  accent-color: #de82e8; /* Color for the radio button */
+  accent-color: #4b41ff; /* Color for the radio button */
   transform: scale(1.5); 
   cursor: pointer;
 }
