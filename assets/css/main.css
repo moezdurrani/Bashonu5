@@ -75,6 +75,7 @@ body {
   color: var(--default-color);
   background-color: var(--background-color);
   font-family: var(--default-font);
+  overflow: hidden;
 }
 
 a {
@@ -980,6 +981,13 @@ section,
 /*--------------------------------------------------------------
 # Services Section
 --------------------------------------------------------------*/
+#services .container {
+  max-height: 100vh; /* Set a maximum height (60% of the viewport height) */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 20px;    /* Add padding for better readability */
+  box-sizing: border-box;
+}
+
 .services .service-item {
   background-color: var(--surface-color);
   box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
@@ -989,6 +997,67 @@ section,
   position: relative;
   z-index: 1;
 }
+
+.sub-section {
+  display: none;
+  text-align: center;
+  max-width: 800px;   
+  margin: 0 auto;    
+  padding: 10px;
+}
+
+.sub-section p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.sub-section.active {
+  display: block;
+}
+
+.toggle-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.toggle-btn {
+  margin: 0 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #333;
+  background-color: #f7f7f7;
+  transition: background-color 0.3s;
+}
+
+.toggle-btn.active {
+  background-color: #3740dc;
+  color: #fff;
+}
+
+
+/* Styling for the toggle buttons */
+.lyrics-toggle {
+  margin: 15px 0;
+}
+
+.lyrics-toggle button {
+  padding: 8px 16px;
+  margin-right: 5px;
+  border: none;
+  background-color: #67b0d1;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.lyrics-toggle button:hover {
+  background-color: #559cb1;
+}
+
 
 .services .service-item:before {
   content: "";

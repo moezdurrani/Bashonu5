@@ -209,11 +209,17 @@
 })();
 
 // Songs added here
+
 import allMusic from './music-list.js';
 
 document.addEventListener("DOMContentLoaded", function () {
   const songListContainer = document.getElementById('songList');
-  const servicesContainer = document.querySelector('#services .container');
+  const khowarLyricsContainer = document.getElementById('khowarText');
+  const urduLyricsContainer = document.getElementById('urduText');
+  const khowarSection = document.getElementById('khowarLyrics');
+  const urduSection = document.getElementById('urduLyrics');
+  const toggleKhowar = document.getElementById('toggleKhowar');
+  const toggleUrdu = document.getElementById('toggleUrdu');
 
   // Display songs on page load
   function displaySongs() {
@@ -231,39 +237,60 @@ document.addEventListener("DOMContentLoaded", function () {
       songDetails.textContent = `Writer: ${song.writer} | Singer: ${song.singer}`;
       songItem.appendChild(songDetails);
 
-      // Click event to fetch and display lyrics
+      // Click event to fetch and display lyrics, default to Urdu, and scroll to lyrics section
       songItem.addEventListener('click', () => {
-        fetchAndDisplayLyrics(song);
+        fetchAndDisplayLyrics(song.lyricsFile);
+        toggleSection("urdu"); // Show Urdu section by default
+        document.getElementById("services").scrollIntoView({ behavior: "smooth" });
       });
 
       songListContainer.appendChild(songItem);
     });
   }
 
-  // Fetch lyrics from the file and display them in the services container
-  function fetchAndDisplayLyrics(song) {
-    const lyricsPath = `assets/lyrics/${song.lyricsFile}`;
+  // Fetch lyrics file, split by "URDUONWARDS" and display in the respective containers
+  function fetchAndDisplayLyrics(lyricsFile) {
+    const lyricsPath = `assets/lyrics/${lyricsFile}`;
     fetch(lyricsPath)
       .then(response => {
         if (!response.ok) throw new Error("Lyrics not found");
         return response.text();
       })
       .then(data => {
-        // Update the services container with the song title and lyrics
-        servicesContainer.innerHTML = `
-          <h2>${song.name}</h2>
-          <p>${data || "Lyrics not available."}</p>
-        `;
+        const lyricsLines = data.split('\n').slice(3).join('\n');
+        const [englishLyrics, khowarLyrics] = lyricsLines.split("URDUONWARDS").map(text => text.trim());
+        
+        // Display English and Khowar lyrics in their respective containers
+        urduLyricsContainer.innerHTML = englishLyrics ? englishLyrics.replace(/\n/g, "<br>") : "Urdu lyrics not found.";
+        khowarLyricsContainer.innerHTML = khowarLyrics ? khowarLyrics.replace(/\n/g, "<br>") : "Khowar lyrics not found.";
       })
       .catch(error => {
         console.error("Error fetching lyrics:", error);
-        servicesContainer.innerHTML = `
-          <h2>${song.name}</h2>
-          <p>Lyrics not available.</p>
-        `;
+        urduLyricsContainer.innerHTML = "Urdu lyrics not found.";
+        khowarLyricsContainer.innerHTML = "Khowar lyrics not found.";
       });
   }
+
+  // Toggle visibility between Khowar and Urdu sections
+  function toggleSection(language) {
+    if (language === "khowar") {
+      khowarSection.classList.add('active');
+      urduSection.classList.remove('active');
+      toggleKhowar.classList.add('active');
+      toggleUrdu.classList.remove('active');
+    } else {
+      urduSection.classList.add('active');
+      khowarSection.classList.remove('active');
+      toggleUrdu.classList.add('active');
+      toggleKhowar.classList.remove('active');
+    }
+  }
+
+  // Toggle button event listeners
+  toggleKhowar.addEventListener('click', () => toggleSection("khowar"));
+  toggleUrdu.addEventListener('click', () => toggleSection("urdu"));
 
   // Call displaySongs on page load
   displaySongs();
 });
+
