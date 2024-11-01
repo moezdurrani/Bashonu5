@@ -317,7 +317,16 @@ document.addEventListener("DOMContentLoaded", function () {
   audioPlayer.addEventListener('timeupdate', () => {
     const progressPercent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
     progressBar.style.width = `${progressPercent}%`;
+  
+    // Calculate the indicator's position based on the width of the progress bar
+    const progressContainerWidth = document.getElementById('progressContainer').offsetWidth;
+    const playPauseButtonWidth = 55; // Width of the play/pause button
+    const indicatorPosition = (progressPercent / 100) * progressContainerWidth + playPauseButtonWidth;
+    document.getElementById('progressIndicator').style.left = `${indicatorPosition}px`;
   });
+  
+  
+  
 
   // Seek functionality when clicking on the progress container
   progressContainer.addEventListener('click', (e) => {
