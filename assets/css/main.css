@@ -864,23 +864,29 @@ section,
   margin-top: 20px;
   height: 100vh; /* Sets the section to take the full viewport height */
   overflow-y: auto; /* Enables vertical scrolling */
-  padding: 20px; /* Adjust padding as needed */
+  padding-bottom: 35px; /* Adjust padding as needed */
   position: relative;
+  padding-top: 35px;
 }
 
+/* #about .container {
+  background: orange;
+} */
+
 .about .song-list {
-  background-color: #ffffff; 
+  /* background-color: #36589b;  */
   border-radius: 8px; /* Rounds the edges */
-  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  width: 100%;
 }
 
 .about .song-item {
   padding: 15px;
   margin-bottom: 10px;
   border-radius: 6px;
-  background-color: white; /* Background for each song item */
+  background-color: rgb(248, 248, 248); /* Background for each song item */
   transition: transform 0.2s, box-shadow 0.2s; /* Smooth animation on hover */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for each item */
+  
 }
 
 /* Song Item Hover Effect */
@@ -907,20 +913,6 @@ section,
   margin: 5px 0 0 0;
   font-family: 'Comfortaa', cursive, sans-serif !important;
 }
-
-/* .about .song-list::-webkit-scrollbar {
-  width: 8px;
-} */
-
-/* .about .song-list::-webkit-scrollbar-thumb {
-  background-color: var(--accent-color); 
-  border-radius: 4px;
-} */
-
-/* .about .song-list::-webkit-scrollbar-track {
-  background: #f1f1f1; /
-} */
-
 
 .about .content h3 {
   font-weight: 700;
@@ -1001,7 +993,6 @@ section,
   overflow-y: auto; /* Enable vertical scrolling */
   padding: 20px;    /* Add padding for better readability */
   box-sizing: border-box;
-  background: red;
 }
 
 .lyrics-container {
