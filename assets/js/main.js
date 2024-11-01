@@ -207,3 +207,63 @@
   document.addEventListener('scroll', navmenuScrollspy);
 
 })();
+
+// Songs added here
+import allMusic from './music-list.js';
+
+document.addEventListener("DOMContentLoaded", function () {
+  const songListContainer = document.getElementById('songList');
+  const servicesContainer = document.querySelector('#services .container');
+
+  // Display songs on page load
+  function displaySongs() {
+    songListContainer.innerHTML = ''; // Clear any existing content
+
+    allMusic.forEach((song) => {
+      const songItem = document.createElement('div');
+      songItem.classList.add('song-item');
+
+      const songName = document.createElement('h3');
+      songName.textContent = song.name;
+      songItem.appendChild(songName);
+
+      const songDetails = document.createElement('p');
+      songDetails.textContent = `Writer: ${song.writer} | Singer: ${song.singer}`;
+      songItem.appendChild(songDetails);
+
+      // Click event to fetch and display lyrics
+      songItem.addEventListener('click', () => {
+        fetchAndDisplayLyrics(song);
+      });
+
+      songListContainer.appendChild(songItem);
+    });
+  }
+
+  // Fetch lyrics from the file and display them in the services container
+  function fetchAndDisplayLyrics(song) {
+    const lyricsPath = `assets/lyrics/${song.lyricsFile}`;
+    fetch(lyricsPath)
+      .then(response => {
+        if (!response.ok) throw new Error("Lyrics not found");
+        return response.text();
+      })
+      .then(data => {
+        // Update the services container with the song title and lyrics
+        servicesContainer.innerHTML = `
+          <h2>${song.name}</h2>
+          <p>${data || "Lyrics not available."}</p>
+        `;
+      })
+      .catch(error => {
+        console.error("Error fetching lyrics:", error);
+        servicesContainer.innerHTML = `
+          <h2>${song.name}</h2>
+          <p>Lyrics not available.</p>
+        `;
+      });
+  }
+
+  // Call displaySongs on page load
+  displaySongs();
+});

@@ -11,8 +11,12 @@
 # Help: https://bootstrapmade.com/color-system/
 --------------------------------------------------------------*/
 /* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Noto+Nastaliq+Urdu:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Noto+Nastaliq+Urdu:wght@400..700&display=swap');
+
+
 :root {
-  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --default-font: "Comfortaa",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --heading-font: "Raleway",  sans-serif;
   --nav-font: "Poppins",  sans-serif;
 }
@@ -852,6 +856,67 @@ section,
 /*--------------------------------------------------------------
 # About Section
 --------------------------------------------------------------*/
+.about {
+  height: 100vh; /* Sets the section to take the full viewport height */
+  overflow-y: auto; /* Enables vertical scrolling */
+  padding: 20px; /* Adjust padding as needed */
+  position: relative;
+}
+
+.about .song-list {
+  background-color: #ffffff; 
+  border-radius: 8px; /* Rounds the edges */
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.about .song-item {
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  background-color: white; /* Background for each song item */
+  transition: transform 0.2s, box-shadow 0.2s; /* Smooth animation on hover */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for each item */
+}
+
+/* Song Item Hover Effect */
+.about .song-item:hover {
+  transform: translateY(-3px); /* Lifts the item on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Darker shadow on hover */
+  background-color: #f0f0f0; /* Slight color change on hover */
+  cursor: pointer;
+}
+
+/* Song Title */
+.about .song-item h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333; /* Darker color for readability */
+  margin: 0;
+  font-family: 'Comfortaa', cursive, sans-serif !important;
+}
+
+/* Song Details (Writer and Singer) */
+.about .song-item p {
+  font-size: 14px;
+  color: #666; /* Lighter color for details */
+  margin: 5px 0 0 0;
+  font-family: 'Comfortaa', cursive, sans-serif !important;
+}
+
+/* .about .song-list::-webkit-scrollbar {
+  width: 8px;
+} */
+
+/* .about .song-list::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color); 
+  border-radius: 4px;
+} */
+
+/* .about .song-list::-webkit-scrollbar-track {
+  background: #f1f1f1; /
+} */
+
+
 .about .content h3 {
   font-weight: 700;
   font-size: 34px;
