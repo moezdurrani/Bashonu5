@@ -1043,11 +1043,13 @@ section,
   border: 1px solid #333;
   background-color: #f7f7f7;
   transition: background-color 0.3s;
+  border-radius: 15px;
 }
 
 .toggle-btn.active {
   background-color: #4058f8;
   color: #fff;
+  border-radius: 15px;
 }
 
 
@@ -1508,92 +1510,6 @@ section,
 }
 
 
-/* Forms */
-.contact-container {
-  height: 50vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  background: linear-gradient(#ffdad5, #fff7f9);
-}
-
-.contact-left {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 20px;
-}
-
-.contact-left-title h2 {
-  font-weight: 600;
-  color: #a363aa;
-  font-size: 40px;
-  margin-bottom: 5px;
-}
-
-.contact-left-title hr {
-  border: none;
-  width: 120px;
-  height: 5px;
-  background: #a363aa;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-.contact-inputs {
-  width: 400px;
-  height: 50px;
-  border: none;
-  outline: none;
-  padding-left: 25px;
-  font-weight: 500;
-  color: #666;
-  border-radius: 50px;
-}
-
-.contact-left textarea{
-  height: 140px;
-  padding-top: 15px;
-  border-radius: 20px;
-} 
-
-.contact-inputs:focus {
-  border: 2px solid #ff994f;
-}
-
-.contact-inputs::placeholder {
-  color: #a9a9a9;
-}
-
-.contact-left button {
-  display: flex;
-  align-items: center;
-  padding: 15px 30px;
-  font-size: 16px;
-  color: #fff;
-  gap: 10px;
-  border: none;
-  border-radius: 50px;
-  background: linear-gradient(270deg, #ff994f, #fa6d86);
-  cursor: pointer;
-}
-
-.contact-left button img {
-  height: 15px;
-}
-
-.contact-right img {
-  width: 500px;
-}
-@media (max-width:800px){
-  .contact-inputs {
-    width: 80vw;
-  }
-  .contact-right {
-    display: none;
-  }
-}
-
 /*--------------------------------------------------------------
 # Pricing Section
 --------------------------------------------------------------*/
@@ -1748,12 +1664,178 @@ section,
 /*--------------------------------------------------------------
 # Contact Section
 --------------------------------------------------------------*/
-.contact .info-wrap {
+
+/* Forms */
+.contact-container {
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.contact-left {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 20px;
+}
+
+.contact-left-title h2 {
+  font-weight: 600;
+  color: #a363aa;
+  font-size: 40px;
+  margin-bottom: 5px;
+}
+
+.contact .section-title {
+  padding: 0;
+  top: 0;
+}
+
+.contact .section-title h2{
+  font-weight: 600;
+  color: #cb2dbe;
+  font-size: 40px;
+  margin: 5px 0;
+}
+
+
+.contact .section-title hr {
+  border: none;
+  width: 240px;
+  height: 5px;
+  background: #b206a4;
+  border-radius: 10px;
+  margin: 15px auto; /* Centers the hr */
+}
+
+
+.contact-left-title hr {
+  border: none;
+  width: 120px;
+  height: 5px;
+  background: #f435e4;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.contact-inputs {
+  width: 100%;
+  max-width: 600px;
+  height: 50px;
+  border: none;
+  outline: none;
+  padding-left: 25px;
+  font-weight: 500;
+  color: #ffffff;
+  border-radius: 50px;
+  background-color: #ec6ee1;
+}
+
+.contact-left textarea {
+  width: 100%;
+  max-width: 600px;
+  height: 140px;
+  padding: 15px;
+  border-radius: 20px;
+  color: #ffffff;
+}
+
+.contact-inputs:focus {
+  border: 2px solid #08b9ff;
+}
+
+.contact-inputs::placeholder {
+  color: #d7d7d7;
+}
+
+.contact-left button {
+  display: flex;
+  align-items: center;
+  padding: 15px 30px;
+  font-size: 16px;
+  color: #fff;
+  gap: 10px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(270deg, #f435e4, #980098);
+  cursor: pointer;
+}
+
+.contact-left button img {
+  height: 15px;
+}
+
+/* Styling for Rating Section */
+
+.contact-rating {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 0px;
+  padding: 20px;
+  background: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.contact-rating p {
+  font-weight: 800;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+
+.contact-rating .rating-label {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: #666;
+  margin: 3px 0;
+  padding: 10px 15px;
+  background: #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact-rating .rating-label:hover {
+  background: #f1f1f1;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-rating input[type="radio"] {
+  margin-right: 20px;
+  accent-color: #de82e8; /* Color for the radio button */
+  transform: scale(1.5); 
+  cursor: pointer;
+}
+
+.contact-rating input[type="radio"]:checked + .rating-label {
+  background: linear-gradient(270deg, #ff994f, #fa6d86);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+@media (max-width: 800px) {
+  .contact-inputs, .contact-left textarea, .contact-rating {
+    width: 80vw;
+    max-width: none;
+  }
+  .contact-right {
+    display: none;
+  }
+}
+
+/* .contact .info-wrap {
   background-color: var(--surface-color);
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
   padding: 30px;
-}
+} */
 
+/* 
 @media (max-width: 575px) {
   .contact .info-wrap {
     padding: 20px;
@@ -1844,7 +1926,7 @@ section,
 
 .contact .php-email-form button[type=submit]:hover {
   background: color-mix(in srgb, var(--accent-color), transparent 25%);
-}
+} */
 
 /*--------------------------------------------------------------
 # Portfolio Details Section
