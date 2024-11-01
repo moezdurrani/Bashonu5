@@ -11,6 +11,9 @@
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMCfO1HBow4S5uC2SfFEX8n4cq8SmHZLb8JsVqw" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -107,31 +110,43 @@
     </section><!-- /About Section -->
 
     <!-- Services Section -->
-  <section id="services" class="services section">
+    <section id="services" class="services section">
+      <div class="container section-title" data-aos="fade-up">
 
-    <!-- Section Title with Toggle Buttons -->
-    <div class="container section-title" data-aos="fade-up">
-      <!-- <h2>Services</h2>
-      <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p> -->
+        <div class="toggle-buttons">
+          <button id="toggleKhowar" class="toggle-btn">Urdu</button>
+          <button id="toggleUrdu" class="toggle-btn active">English</button>
+        </div>
+    
+        <!-- Custom Audio Player Controls -->
+        <div class="custom-audio-player">
+          <button id="playPauseBtn" class="play-pause-btn">
+            <i id="playPauseIcon" class="fas fa-play"></i>
+          </button>
+          <div id="progressContainer" class="progress-container">
+            <div id="progressBar" class="progress-bar"></div>
+          </div>
+        </div>
+        <audio id="audioPlayer" style="display: none;">
+          <source src="" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        
 
-      <!-- Toggle Buttons (inside section-title) -->
-      <div class="toggle-buttons">
-        <button id="toggleKhowar" class="toggle-btn">Urdu</button>
-        <button id="toggleUrdu" class="toggle-btn active">English</button>
       </div>
-    </div><!-- End Section Title -->
-
-    <!-- Lyrics Container -->
-    <div class="container lyrics-container">
-      <div id="khowarLyrics" class="sub-section">
-        <p id="khowarText">Select a song to view the Khowar lyrics.</p>
+    
+      <!-- Lyrics Container -->
+      <div class="container lyrics-container">
+        <div id="khowarLyrics" class="sub-section">
+          <p id="khowarText">Select a song to view the Khowar lyrics.</p>
+        </div>
+        <div id="urduLyrics" class="sub-section active">
+          <p id="urduText">Select a song to view the Urdu lyrics.</p>
+        </div>
       </div>
-      <div id="urduLyrics" class="sub-section active">
-        <p id="urduText">Select a song to view the Urdu lyrics.</p>
-      </div>
-    </div>
+    </section>
+    
 
-  </section><!-- /Services Section -->
 
 
   <!-- Team Section -->

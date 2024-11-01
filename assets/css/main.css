@@ -1125,6 +1125,92 @@ section,
   border-radius: 0px;
 }
 
+
+/* Container for the custom audio player */
+.custom-audio-player {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 1400px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* Play/Pause Button */
+.play-pause-btn {
+  width: 50px;
+  height: 50px;
+  background-color: #f435e4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.play-pause-btn:hover {
+  background-color: #d12ed1;
+}
+
+.play-pause-btn i {
+  font-size: 18px;
+  color: white;
+}
+
+
+/* Progress Container */
+.progress-container {
+  flex-grow: 1;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Progress Bar with Gradient Background */
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #f419e1, #ff7e1b);
+  width: 0;
+  transition: width 0.1s linear;
+  border-radius: 5px;
+  position: relative;
+}
+
+/* Rectangle at the end of the progress bar */
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  top: -4px; /* Move it above the progress bar */
+  right: -4px; /* Move it slightly outside the progress bar */
+  width: 8px; /* Width of the rectangle */
+  height: 16px; /* Height of the rectangle */
+  background-color: #bd501d; /* Use a color that contrasts with the progress bar */
+  border-radius: 2px;
+}
+
+/* Custom styling for smaller screens */
+@media (max-width: 600px) {
+  .custom-audio-player {
+    max-width: 100%;
+  }
+
+  .play-pause-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+}
+
+
+
+
 /*--------------------------------------------------------------
 # Stats Section
 --------------------------------------------------------------*/
