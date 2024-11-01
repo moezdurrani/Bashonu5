@@ -302,6 +302,26 @@ h6 {
   }
 }
 
+#currentSongIcon {
+  font-size: 408px;
+  color: #f435e4; /* Primary color for the icon */
+  padding: 10px;
+  transition: color 0.3s ease, transform 0.3s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+#currentSongIcon:hover {
+  color: #ffffff; /* Change icon color on hover */
+  background-color: #f435e4; /* Change background on hover */
+  transform: scale(1.1); 
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
+}
+
+
 /* Mobile Navigation */
 @media (max-width: 1199px) {
   .mobile-nav-toggle {

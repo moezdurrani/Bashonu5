@@ -226,6 +226,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const progressBar = document.getElementById('progressBar');
   const progressIndicator = document.getElementById('progressIndicator');
 
+  const currentSongIcon = document.getElementById("currentSongIcon");
+  let currentSongLyricsSection = null;
+
   let currentSongSrc = null;
 
   playPauseBtn.addEventListener('click', togglePlayPause);
@@ -279,6 +282,9 @@ document.addEventListener("DOMContentLoaded", function () {
         audioPlayer.src = audioSrc; 
         audioPlayer.play(); 
         playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'; 
+
+        // Set the current song lyrics section ID for navigation
+        currentSongLyricsSection = document.getElementById("services"); // Assuming "services" section is where lyrics are displayed
       })
       .catch(error => {
         console.error("Error fetching lyrics:", error);
@@ -286,6 +292,15 @@ document.addEventListener("DOMContentLoaded", function () {
         khowarLyricsContainer.innerHTML = "Khowar lyrics not found.";
       });
   }
+
+  // Add click event listener to the current song icon
+  currentSongIcon.addEventListener("click", function () {
+    if (currentSongLyricsSection) {
+      currentSongLyricsSection.scrollIntoView({ behavior: "smooth" });
+    } else {
+      alert("No song is currently playing!");
+    }
+  });
 
   function toggleSection(language) {
     if (language === "khowar") {
