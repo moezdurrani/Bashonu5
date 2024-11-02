@@ -1507,10 +1507,12 @@ section,
   font-size: 1.1rem;
   line-height: 2.2;
   color: #444444;
+  overflow-y: scroll;
 }
 
 #team {
   height: 100vh;
+  overflow: scroll;
 }
 
 
@@ -1895,11 +1897,4 @@ section,
   font-size: 20px;
   margin-right: 8px;
   color: var(--accent-color);
-}
-
-/*--------------------------------------------------------------
-# Starter Section Section
---------------------------------------------------------------*/
-.starter-section {
-  /* Add your styles here */
 }

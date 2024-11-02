@@ -232,38 +232,43 @@ document.addEventListener("DOMContentLoaded", function () {
   playPauseBtn.addEventListener('click', togglePlayPause);
 
   // Display songs on page load
-  function displaySongs() {
-    songListContainer.innerHTML = ''; 
+function displaySongs() {
+  songListContainer.innerHTML = ''; 
 
-    allMusic.forEach((song) => {
-      const songItem = document.createElement('div');
-      songItem.classList.add('song-item');
+  // Sort songs alphabetically by song name
+  allMusic.sort((a, b) => a.name.localeCompare(b.name));
 
-      const songName = document.createElement('h3');
-      songName.textContent = song.name;
-      songItem.appendChild(songName);
+  allMusic.forEach((song) => {
+    const songItem = document.createElement('div');
+    songItem.classList.add('song-item');
 
-      const songDetails = document.createElement('p');
-      songDetails.textContent = `Writer: ${song.writer} | Singer: ${song.singer}`;
-      songItem.appendChild(songDetails);
+    const songName = document.createElement('h3');
+    songName.textContent = song.name;
+    songItem.appendChild(songName);
 
-      songItem.addEventListener('click', () => {
-        if (currentSongSrc === song.src) {
-          // Scroll to lyrics if the same song is already playing
-          toggleSection("urdu"); 
-          document.getElementById("services").scrollIntoView({ behavior: "smooth" });
-          return; 
-        }
+    const songDetails = document.createElement('p');
+    songDetails.textContent = `Writer: ${song.writer} | Singer: ${song.singer}`;
+    songItem.appendChild(songDetails);
 
-        // Load and play a new song if a different one is clicked
-        fetchAndDisplayLyrics(song.lyricsFile, song.src);
+    songItem.addEventListener('click', () => {
+      if (currentSongSrc === song.src) {
+        // Scroll to lyrics if the same song is already playing
         toggleSection("urdu"); 
         document.getElementById("services").scrollIntoView({ behavior: "smooth" });
-      });
+        return; 
+      }
 
-      songListContainer.appendChild(songItem);
+      // Load and play a new song if a different one is clicked
+      fetchAndDisplayLyrics(song.lyricsFile, song.src);
+      toggleSection("urdu"); 
+      document.getElementById("services").scrollIntoView({ behavior: "smooth" });
     });
-  }
+
+    songListContainer.appendChild(songItem);
+  });
+}
+
+  
 
   // Fetch and display lyrics, start playing the song
   function fetchAndDisplayLyrics(lyricsFile, audioSrc) {
@@ -384,3 +389,5 @@ audioPlayer.addEventListener('ended', () => updateLyricsIcon(false));
 
   displaySongs();
 });
+
+
