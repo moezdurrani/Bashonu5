@@ -317,6 +317,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Add event listener for the scroll-to-lyrics icon
+const scrollToLyricsIcon = document.getElementById("scroll-to-lyrics");
+const lyricsIcon = document.getElementById("lyricsIcon");
+
+scrollToLyricsIcon.addEventListener("click", function () {
+  if (currentSongSrc) {
+    document.getElementById("services").scrollIntoView({ behavior: "smooth" });
+  } else {
+    alert("No song is currently playing!");
+  }
+});
+
+// Update the lyrics icon depending on play state
+function updateLyricsIcon(isPlaying) {
+  lyricsIcon.src = isPlaying ? "assets/img/playingMusic.gif" : "assets/img/notPlayingMusic.png";
+}
+
+// Update the icon when play/pause state changes
+audioPlayer.addEventListener('play', () => updateLyricsIcon(true));
+audioPlayer.addEventListener('pause', () => updateLyricsIcon(false));
+audioPlayer.addEventListener('ended', () => updateLyricsIcon(false));
+
+
   // Toggle buttons for Khowar and Urdu
   toggleKhowar.addEventListener('click', () => toggleSection("khowar"));
   toggleUrdu.addEventListener('click', () => toggleSection("urdu"));
